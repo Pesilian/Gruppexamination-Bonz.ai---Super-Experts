@@ -14,29 +14,29 @@ functions:
     handler: function/handler.getAllBookings
     events:
       - httpApi:
-          path: /getAllBookings
+          path: /booking
           method: get
   hello:
     handler: function/handler.createBooking
     events:
       - httpApi:
-          path: /createBooking
+          path: /booking
           method: post
   hello:
     handler: function/handler.deleteBooking
     events:
       - httpApi:
-          path: /deleteBooking
+          path: /booking
           method: delete
   hello:
     handler: function/handler.changeBooking
     events:
       - httpApi:
-          path: /changeBooking
+          path: /booking
           method: put
   hello:
     handler: function/handler.getBooking
     events:
       - httpApi:
-          path: /getBooking
+          path: /booking/userId
           method: get
