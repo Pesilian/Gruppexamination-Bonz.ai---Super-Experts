@@ -1,0 +1,42 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: dylanr96
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: BONZAI
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  
+
+functions:
+  hello:
+    handler: function/handler.getAllBookings
+    events:
+      - httpApi:
+          path: /getAllBookings
+          method: get
+  hello:
+    handler: function/handler.createBooking
+    events:
+      - httpApi:
+          path: /createBooking
+          method: post
+  hello:
+    handler: function/handler.deleteBooking
+    events:
+      - httpApi:
+          path: /deleteBooking
+          method: delete
+  hello:
+    handler: function/handler.changeBooking
+    events:
+      - httpApi:
+          path: /changeBooking
+          method: put
+  hello:
+    handler: function/handler.getBooking
+    events:
+      - httpApi:
+          path: /getBooking
+          method: get
