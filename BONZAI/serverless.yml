@@ -7,36 +7,72 @@ frameworkVersion: "4"
 provider:
   name: aws
   runtime: nodejs20.x
-  
+  region: eu-north-1
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "*"
 
 functions:
-  hello:
+  getAllBookings:
     handler: function/handler.getAllBookings
     events:
       - httpApi:
           path: /booking
           method: get
-  hello:
+  createBooking:
     handler: function/handler.createBooking
     events:
       - httpApi:
           path: /booking
           method: post
-  hello:
+  deleteBooking:
     handler: function/handler.deleteBooking
     events:
       - httpApi:
           path: /booking
           method: delete
-  hello:
+  changeBooking:
     handler: function/handler.changeBooking
     events:
       - httpApi:
           path: /booking
           method: put
-  hello:
+  getBooking:
     handler: function/handler.getBooking
     events:
       - httpApi:
-          path: /booking/userId
+          path: /booking/userID
           method: get
+resources:
+  Resources:
+    Rooms:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: rooms
+        AttributeDefinitions:
+          - AttributeName: "roomName"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "roomName"
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    Bookings:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: bookings
+        AttributeDefinitions:
+          - AttributeName: "bookingNumber"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "bookingNumber"
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST

@@ -1,8 +1,11 @@
-exports.getAllBookings = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: "Go Serverless v4! Your function executed successfully!",
-    }),
-  };
+module.exports.getAllBookings = async (event, context) => {
+  try {
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify({ message: `Welcome ${result.Item.Username}!` }),
+    };
+    return response;
+  } catch (error) {
+    return console.error(error);
+  }
 };
