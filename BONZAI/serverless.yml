@@ -23,31 +23,31 @@ provider:
 
 functions:
   getAllBookings:
-    handler: function/handler.getAllBookings
+    handler: functions/getAllBookings.handler
     events:
       - httpApi:
           path: /booking
           method: get
   createBooking:
-    handler: function/handler.createBooking
+    handler: functions/createBooking.handler
     events:
       - httpApi:
           path: /booking
           method: post
   deleteBooking:
-    handler: function/handler.deleteBooking
+    handler: functions/deleteBooking.handler
     events:
       - httpApi:
           path: /booking
           method: delete
   changeBooking:
-    handler: function/handler.changeBooking
+    handler: functions/changeBooking.handler
     events:
       - httpApi:
           path: /booking
           method: put
   getBooking:
-    handler: function/handler.getBooking
+    handler: functions/getBooking.handler
     events:
       - httpApi:
           path: /booking/userID
