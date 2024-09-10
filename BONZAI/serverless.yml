@@ -7,36 +7,72 @@ frameworkVersion: "4"
 provider:
   name: aws
   runtime: nodejs20.x
-  
+  region: eu-north-1
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "*"
 
 functions:
-  hello:
-    handler: function/handler.getAllBookings
+  getAllBookings:
+    handler: functions/getAllBookings.handler
     events:
       - httpApi:
           path: /booking
           method: get
-  hello:
-    handler: function/handler.createBooking
+  createBooking:
+    handler: functions/createBooking.handler
     events:
       - httpApi:
           path: /booking
           method: post
-  hello:
-    handler: function/handler.deleteBooking
+  deleteBooking:
+    handler: functions/deleteBooking.handler
     events:
       - httpApi:
           path: /booking
           method: delete
-  hello:
-    handler: function/handler.changeBooking
+  changeBooking:
+    handler: functions/changeBooking.handler
     events:
       - httpApi:
           path: /booking
           method: put
-  hello:
-    handler: function/handler.getBooking
+  getBooking:
+    handler: functions/getBooking.handler
     events:
       - httpApi:
-          path: /booking/userId
+          path: /booking/userID
           method: get
+resources:
+  Resources:
+    Rooms:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: rooms
+        AttributeDefinitions:
+          - AttributeName: "roomName"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "roomName"
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    Bookings:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: bookings
+        AttributeDefinitions:
+          - AttributeName: "bookingNumber"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "bookingNumber"
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
