@@ -1,36 +1,30 @@
 import { nanoid } from "nanoid";
 import { db } from "../dynamoDb.js";
-import { onlyLetter } from "../middleware/errorHandling.js";
+import { roomSchema } from "../middleware/roomSchema.js";
 
 export const handler = async (event, context) => {
   const bookingNumber = nanoid();
+  const { error } = roomSchema.validate(JSON.parse(event.body));
+  if (error) {
+    const response = {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: error.message,
+      }),
+    };
+    return response;
+  }
   const {
     firstName,
     surname,
     email,
     checkInDate,
     checkOutDate,
-    numGuests,
+    guests,
     roomType: requestedRooms,
   } = JSON.parse(event.body);
 
   try {
-    const letter = /^[A-Za-z]+$/;
-
-    if (
-      !letter.test(firstName) ||
-      firstName.length < 3 ||
-      !letter.test(surname) ||
-      surname.length < 3
-    ) {
-      const response = {
-        statusCode: 400,
-        body: JSON.stringify({
-          message: `Name can only contain letters.`,
-        }),
-      };
-      return response;
-    }
     const rooms = await db.scan({
       TableName: "rooms",
     });
@@ -58,7 +52,7 @@ export const handler = async (event, context) => {
         email: email,
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
-        numGuests: numGuests,
+        guests: guests,
         roomType: requestedRooms,
       },
     });
