@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import { db } from "../dynamoDb.js";
+import { onlyLetter } from "../middleware/errorHandling.js";
 
 export const handler = async (event, context) => {
   const bookingNumber = nanoid();
@@ -14,6 +15,22 @@ export const handler = async (event, context) => {
   } = JSON.parse(event.body);
 
   try {
+    const letter = /^[A-Za-z]+$/;
+
+    if (
+      !letter.test(firstName) ||
+      firstName.length < 3 ||
+      !letter.test(surname) ||
+      surname.length < 3
+    ) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({
+          message: `Name can only contain letters.`,
+        }),
+      };
+      return response;
+    }
     const rooms = await db.scan({
       TableName: "rooms",
     });
