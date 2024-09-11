@@ -10,10 +10,28 @@ export const handler = async (event, context) => {
     checkInDate,
     checkOutDate,
     numGuests,
-    roomType,
+    roomType: requestedRooms,
   } = JSON.parse(event.body);
 
   try {
+    const rooms = await db.scan({
+      TableName: "rooms",
+    });
+
+    for (const [roomType, numOfRooms] of Object.entries(requestedRooms)) {
+      const available = rooms.Items.find((room) => room.roomName === roomType);
+
+      if (!available) {
+        const response = {
+          statusCode: 400,
+          body: JSON.stringify({
+            message: `Room type ${roomType} was not found. Available room type are: Enkelrum, Dubbelrum, and Svit.`,
+          }),
+        };
+        return response;
+      }
+    }
+
     const result = await db.put({
       TableName: "bookings",
       Item: {
@@ -24,7 +42,7 @@ export const handler = async (event, context) => {
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
         numGuests: numGuests,
-        roomType: roomType,
+        roomType: requestedRooms,
       },
     });
     const response = {
