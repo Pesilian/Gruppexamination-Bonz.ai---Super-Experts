@@ -29,18 +29,40 @@ export const handler = async (event, context) => {
       TableName: "rooms",
     });
 
-    for (const [roomType, numOfRooms] of Object.entries(requestedRooms)) {
-      const available = rooms.Items.find((room) => room.roomName === roomType);
+    const allBookings = await db.scan({
+      TableName: "bookings",
+    });
 
-      if (!available) {
-        const response = {
-          statusCode: 400,
-          body: JSON.stringify({
-            message: `Room type ${roomType} was not found. Available room type are: Enkelrum, Dubbelrum, and Svit.`,
-          }),
-        };
-        return response;
-      }
+    let numOfGuest = 0;
+    const totalCurrentGuests = {};
+    rooms.Items.forEach((room) => {
+      numOfGuest += room.guests;
+    });
+
+    allBookings.Items.forEach((booking) => {
+      Object.entries(booking.roomType).forEach(([roomType, numOfRooms]) => {
+        if (totalCurrentGuests[roomType]) {
+          totalCurrentGuests[roomType] += numOfRooms;
+        } else {
+          totalCurrentGuests[roomType] = numOfRooms;
+        }
+      });
+    });
+
+    const totalRooms = Object.values(totalCurrentGuests).reduce(
+      (sum, count) => sum + count,
+      0
+    );
+
+    if (numOfGuest < guests) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({
+          message: numOfGuest,
+          totalRooms,
+        }),
+      };
+      return response;
     }
 
     const result = await db.put({
@@ -58,7 +80,7 @@ export const handler = async (event, context) => {
     });
     const response = {
       statusCode: 200,
-      body: JSON.stringify({ result }),
+      body: JSON.stringify({ message: "good" }),
     };
     return response;
   } catch (error) {

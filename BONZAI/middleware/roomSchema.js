@@ -12,29 +12,49 @@ export const roomSchema = Joi.object({
     "any.required": "Surname is required.",
   }),
   email: Joi.string().email().required().messages({
-    // proper email error message fix
     "string.base": "Email is not valid.",
+    "string.email": "Please enter a valid email address.",
     "any.required": "Email is required.",
   }),
-  checkInDate: Joi.date().iso().required().messages({
-    // proper date error message fix
+  checkInDate: Joi.date().min("now").iso().required().messages({
+    "date.format": "Check-in date must be in ISO format (YYYY-MM-DD).",
     "date.base": "Date is not valid.",
+    "date.min": "Check-in date must be current date or a later date.",
     "any.required": "Check-in date is required.",
   }),
-  checkOutDate: Joi.date().iso().required().messages({
-    // proper date error message fix
-    "date.base": "Date is not valid.",
-    "any.required": "Check out date is required.",
-  }),
+  checkOutDate: Joi.date()
+    .greater(Joi.ref("checkInDate"))
+    .iso()
+    .required()
+    .messages({
+      "date.format": "Check-in date must be in ISO format (YYYY-MM-DD).",
+      "date.base": "Date is not valid.",
+      "date.greater": "Check-out date must be later than check-in date.",
+      "any.required": "Check out date is required.",
+    }),
   guests: Joi.number().integer().min(1).required().messages({
     "number.base": "Guests should be a number.",
-    "number.min": "Number of guests can not be less than 0.",
+    "number.min": "Number of guests can not be less than 1.",
     "any.required": "Guests are required.",
   }),
-  roomType: Joi.object.required()({
-    //At least one room type must be included, also must fit guest requirement
-    Enkelrum: Joi.number().integer().min(0).required(), // Should not be required but if included must be integer
-    Dubbelrum: Joi.number().integer().min(0).required(), // Should not be required but if included must be integer
-    Svit: Joi.number().integer().min(0).required(), // Should not be required but if included must be integer
-  }),
+  roomType: Joi.object({
+    Enkelrum: Joi.number().integer().min(1).messages({
+      "number.base": "Enkelrum must be a valid number.",
+      "number.min": "Enkelrum cannot be less than 1.",
+    }),
+    Dubbelrum: Joi.number().integer().min(1).messages({
+      "number.base": "Dubbelrum must be a valid number.",
+      "number.min": "Dubbelrum cannot be less than 1.",
+    }),
+    Svit: Joi.number().integer().min(1).messages({
+      "number.base": "Svit must be a valid number.",
+      "number.min": "Svit cannot be less than 1.",
+    }),
+  })
+    .required()
+    .min(1)
+    .messages({
+      "object.min": "At least one room type must be included.",
+      "object.unknown": "Accepted room types are Enkelrum, Dubbelrum, or Svit.",
+    }),
 });
