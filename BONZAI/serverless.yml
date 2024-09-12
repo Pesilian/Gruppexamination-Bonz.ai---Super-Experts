@@ -36,7 +36,7 @@ functions:
     handler: functions/deleteBooking.handler
     events:
       - httpApi:
-          path: /booking
+          path: /booking/{id} 
           method: delete
   changeBooking:
     handler: functions/changeBooking.handler
