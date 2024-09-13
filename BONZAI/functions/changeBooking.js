@@ -1,12 +1,4 @@
-const { DynamoDB } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocument } = require('@aws-sdk/lib-dynamodb');
-const { sendResponse, sendError } = require('./services/index.js');
-
-const client = new DynamoDB({
-  region: 'eu-north-1',
-});
-
-const db = DynamoDBDocument.from(client);
+import { db } from "../dynamoDb.js"
 
 async function updateReservation(bookingNumber, updateParams) {
   const updateExpression = [];
