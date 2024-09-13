@@ -1,5 +1,5 @@
-import { db } from "../dynamoDb.js"
-import {sendResponse, sendError} from "./services/index.js"
+import { db } from "../dynamoDb.js";
+import { sendResponse, sendError } from "./services/index.js";
 
 async function updateReservation(bookingNumber, updateParams) {
   const updateExpression = [];
@@ -15,18 +15,18 @@ async function updateReservation(bookingNumber, updateParams) {
   }
 
   return db.update({
-    TableName: 'bookings',
+    TableName: "bookings",
     Key: { bookingNumber },
-    UpdateExpression: `SET ${updateExpression.join(', ')}`,
+    UpdateExpression: `SET ${updateExpression.join(", ")}`,
     ExpressionAttributeNames: expressionAttributeNames,
     ExpressionAttributeValues: expressionAttributeValues,
-    ReturnValues: 'ALL_NEW',
+    ReturnValues: "ALL_NEW",
   });
 }
 
 async function getReservation(bookingNumber) {
   const result = await db.get({
-    TableName: 'bookings',
+    TableName: "bookings",
     Key: {
       bookingNumber: bookingNumber,
     },
@@ -35,12 +35,12 @@ async function getReservation(bookingNumber) {
   return result.Item;
 }
 
-exports const handler = async event => {
-  console.log('Event:', JSON.stringify(event, null, 2));
+export const handler = async (event) => {
+  console.log("Event:", JSON.stringify(event, null, 2));
 
   const bookingNumber = event.pathParameters ? event.pathParameters.id : null;
   if (!bookingNumber) {
-    return sendError(400, 'Booking number is required');
+    return sendError(400, "Booking number is required");
   }
 
   const updateData = JSON.parse(event.body);
@@ -49,8 +49,8 @@ exports const handler = async event => {
   try {
     reservationInfo = await getReservation(bookingNumber);
   } catch (error) {
-    console.error('Error fetching reservation:', error);
-    return sendError(500, 'Error fetching reservation');
+    console.error("Error fetching reservation:", error);
+    return sendError(500, "Error fetching reservation");
   }
 
   if (!reservationInfo) {
@@ -65,7 +65,7 @@ exports const handler = async event => {
   if (differenceInDays < 2) {
     return sendError(
       400,
-      'You cannot modify your stay later than 2 days before check-in.'
+      "You cannot modify your stay later than 2 days before check-in."
     );
   }
 
@@ -76,7 +76,7 @@ exports const handler = async event => {
     );
     return sendResponse(200, updatedReservation.Attributes);
   } catch (error) {
-    console.error('Error updating reservation:', error);
+    console.error("Error updating reservation:", error);
     return sendError(500, "Can't update reservation");
   }
 };
