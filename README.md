@@ -35,6 +35,8 @@ Instructions:
 3. Enter serverless deploy into console, click enter
 4. Make request with unique endpoint URL
 
+---
+
 URL Endpoints
 GET /booking
 
