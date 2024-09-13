@@ -238,7 +238,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/BONZAI/dev/1726245771538-2024-09-13T16:42:51.538Z/BONZAI.zip"
+                  "S3Key": "serverless/BONZAI/dev/1726247124784-2024-09-13T17:05:24.784Z/BONZAI.zip"
                 },
                 "Handler": "functions/getAllBookings.handler",
                 "Runtime": "nodejs20.x",
@@ -263,7 +263,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/BONZAI/dev/1726245771538-2024-09-13T16:42:51.538Z/BONZAI.zip"
+                  "S3Key": "serverless/BONZAI/dev/1726247124784-2024-09-13T17:05:24.784Z/BONZAI.zip"
                 },
                 "Handler": "functions/createBooking.handler",
                 "Runtime": "nodejs20.x",
@@ -288,7 +288,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/BONZAI/dev/1726245771538-2024-09-13T16:42:51.538Z/BONZAI.zip"
+                  "S3Key": "serverless/BONZAI/dev/1726247124784-2024-09-13T17:05:24.784Z/BONZAI.zip"
                 },
                 "Handler": "functions/deleteBooking.handler",
                 "Runtime": "nodejs20.x",
@@ -313,7 +313,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/BONZAI/dev/1726245771538-2024-09-13T16:42:51.538Z/BONZAI.zip"
+                  "S3Key": "serverless/BONZAI/dev/1726247124784-2024-09-13T17:05:24.784Z/BONZAI.zip"
                 },
                 "Handler": "functions/changeBooking.handler",
                 "Runtime": "nodejs20.x",
@@ -338,7 +338,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/BONZAI/dev/1726245771538-2024-09-13T16:42:51.538Z/BONZAI.zip"
+                  "S3Key": "serverless/BONZAI/dev/1726247124784-2024-09-13T17:05:24.784Z/BONZAI.zip"
                 },
                 "Handler": "functions/getBooking.handler",
                 "Runtime": "nodejs20.x",
@@ -1196,36 +1196,36 @@
     "serviceUniqueId": "arn:aws:cloudformation:eu-north-1:992382623759:stack/BONZAI-dev/6d145dd0-6ed7-11ef-a26d-0a69dbe0f0ed",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-north-1:992382623759:stack/BONZAI-dev/6d145dd0-6ed7-11ef-a26d-0a69dbe0f0ed",
     "serviceProviderAwsCfStackCreated": "2024-09-09T18:14:59.949Z",
-    "serviceProviderAwsCfStackUpdated": "2024-09-13T16:42:52.936Z",
+    "serviceProviderAwsCfStackUpdated": "2024-09-13T17:05:26.017Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "GetBookingLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-getBooking:173",
+        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-getBooking:179",
         "Description": "Current Lambda function version",
         "ExportName": "sls-BONZAI-dev-GetBookingLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ChangeBookingLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-changeBooking:173",
+        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-changeBooking:179",
         "Description": "Current Lambda function version",
         "ExportName": "sls-BONZAI-dev-ChangeBookingLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "DeleteBookingLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-deleteBooking:173",
+        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-deleteBooking:179",
         "Description": "Current Lambda function version",
         "ExportName": "sls-BONZAI-dev-DeleteBookingLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetAllBookingsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-getAllBookings:173",
+        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-getAllBookings:179",
         "Description": "Current Lambda function version",
         "ExportName": "sls-BONZAI-dev-GetAllBookingsLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "CreateBookingLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-createBooking:173",
+        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:BONZAI-dev-createBooking:179",
         "Description": "Current Lambda function version",
         "ExportName": "sls-BONZAI-dev-CreateBookingLambdaFunctionQualifiedArn"
       },
