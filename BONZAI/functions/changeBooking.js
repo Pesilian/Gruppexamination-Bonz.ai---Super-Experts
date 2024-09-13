@@ -27,7 +27,7 @@ async function updateReservation(bookingNumber, updateParams) {
     UpdateExpression: `SET ${updateExpression.join(', ')}`,
     ExpressionAttributeNames: expressionAttributeNames,
     ExpressionAttributeValues: expressionAttributeValues,
-    ReturnValues: 'ALL_NEW', // To return the updated item
+    ReturnValues: 'ALL_NEW',
   });
 }
 
