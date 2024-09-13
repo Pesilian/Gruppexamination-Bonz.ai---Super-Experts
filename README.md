@@ -18,7 +18,7 @@ Description: Retrieve a specific booking by bookingNumber.
 
 
 ### POST /booking 
-Url: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking
+URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking
 
 Description: Create a new booking.
 
