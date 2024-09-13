@@ -1,12 +1,6 @@
-const { DynamoDB } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
-const { sendResponse, sendError } = require('./services/index.js'); 
+import { db } from "../dynamoDb.js";
+import { sendResponse, sendError } from './services/index.js'; 
 
-const client = new DynamoDB({
-  region: "eu-north-1",
-});
-
-const db = DynamoDBDocument.from(client);
 
 async function deleteReservation(bookingNumber) {
   return db.delete({
@@ -28,7 +22,7 @@ async function getReservation(bookingNumber) {
   return result.Item;
 }
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   console.log("Event:", JSON.stringify(event, null, 2));
 
   const bookingNumber = event.pathParameters ? event.pathParameters.id : null;
@@ -66,3 +60,4 @@ exports.handler = async (event) => {
     return sendError(500, "Can't delete reservation");
   }
 };
+
