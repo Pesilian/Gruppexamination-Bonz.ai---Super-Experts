@@ -1,4 +1,5 @@
 import { db } from "../dynamoDb.js"
+import {sendResponse, sendError} from "./services/index.js"
 
 async function updateReservation(bookingNumber, updateParams) {
   const updateExpression = [];
@@ -34,7 +35,7 @@ async function getReservation(bookingNumber) {
   return result.Item;
 }
 
-exports.handler = async event => {
+exports const handler = async event => {
   console.log('Event:', JSON.stringify(event, null, 2));
 
   const bookingNumber = event.pathParameters ? event.pathParameters.id : null;
