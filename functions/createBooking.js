@@ -2,6 +2,22 @@ import { nanoid } from "nanoid";
 import { db } from "../dynamoDb.js";
 import { roomSchema } from "../middleware/roomSchema.js";
 
+const requirementRooms = (rooms, roomType, guests) => {
+  const mapOfRoomTypes = rooms.reduce((map, room) => {
+    if (!map[room.roomName]) {
+      map[room.roomName] = 0;
+    }
+    map[room.roomName] += room.guests;
+    return map;
+  }, {});
+
+  const requiredRooms = roomType.reduce((total, type) => {
+    return total + (mapOfRoomTypes[type] || 0);
+  }, 0);
+
+  return requiredRooms >= guests;
+};
+
 export const handler = async (event, context) => {
   const bookingNumber = nanoid();
   const { error } = roomSchema.validate(JSON.parse(event.body));
@@ -37,11 +53,22 @@ export const handler = async (event, context) => {
       ([key, value]) => Array(value).fill(key)
     );
 
-    const roomCapacities = {
-      Enkelrum: 1,
-      Dubbelrum: 2,
-      Svit: 3,
-    };
+    const correctRoomTypes = requirementRooms(
+      rooms.Items,
+      differentRooms,
+      guests
+    );
+
+    if (!correctRoomTypes) {
+      const response = {
+        statusCode: 400,
+        body: JSON.stringify({
+          message:
+            "The requested number of guests does not fit within the available rooms.",
+        }),
+      };
+      return response;
+    }
 
     const totalCurrentGuests = {};
 
