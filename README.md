@@ -31,7 +31,7 @@ Request Body:<br/>
 "checkOutDate": "2024-09-22",<br/>
 "numGuests": 1,<br/>
 "roomType":<br/> {
-   "Enkelrum": 1<br/>
+   "Enkelrum": 1
   }
 }
 
@@ -43,13 +43,13 @@ Description: Update an existing booking.
 
 
 {
-  "firstName": "John",
-  "surname": "Doe",
-  "email": "john.doe@example.com",
-  "checkInDate": "2024-09-12",
-  "checkOutDate": "2024-09-22",
-  "numGuests": 1,
-  "roomType": {
+  "firstName": "John",<br/>
+  "surname": "Doe",<br/>
+  "email": "john.doe@example.com",<br/>
+  "checkInDate": "2024-09-12",<br/>
+  "checkOutDate": "2024-09-22",<br/>
+  "numGuests": 1,<br/>
+  "roomType":<br/> {
     "Svit": 1
   }
 }
