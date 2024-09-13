@@ -24,14 +24,14 @@ Description: Create a new booking.
 
 Request Body:< br / >
 {
-"firstName": "John",< br / >
-"surname": "Doe",< br / >
-"email": "john.doe@example.com",< br / >
-"checkInDate": "2024-09-15",< br / >
-"checkOutDate": "2024-09-22",< br / >
-"numGuests": 1,< br / >
-"roomType":< br / > {
-   "Enkelrum": 1< br / >
+"firstName": "John",<br/>
+"surname": "Doe",<br/>
+"email": "john.doe@example.com",<br/>
+"checkInDate": "2024-09-15",<br/>
+"checkOutDate": "2024-09-22",<br/>
+"numGuests": 1,<br/>
+"roomType":<br/> {
+   "Enkelrum": 1<br/>
   }
 }
 
