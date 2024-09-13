@@ -31,8 +31,8 @@ Request Body:
 "checkOutDate": "2024-09-22",<br/>
 "numGuests": 1,<br/>
 "roomType":<br/> {<br/>
-   "Enkelrum": 1
-  }<br/>
+   "Enkelrum": 1<br/>
+  }
 }
 
 
