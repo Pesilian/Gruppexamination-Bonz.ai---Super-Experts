@@ -12,7 +12,7 @@ Description: Retrieve all bookings.
 
 
 ### GET /booking/{bookingNumber}
-URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking/ {bookingNumber}
+URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking/{bookingNumber}
 
 Description: Retrieve a specific booking by bookingNumber.
 
@@ -37,7 +37,7 @@ Request Body:<br/>
 
 
 ### PUT /booking/{bookingNumber}
-URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking/ {bookingNumber}
+URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking/{bookingNumber}
 
 Description: Update an existing booking.
 
@@ -56,7 +56,7 @@ Description: Update an existing booking.
 
 
 ### DELETE /booking/{bookingNumber}
-URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking/ {bookingNumber}
+URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking/{bookingNumber}
 
 Description: Delete a booking by its bookingNumber.
 
