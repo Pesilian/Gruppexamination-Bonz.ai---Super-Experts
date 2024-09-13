@@ -30,9 +30,9 @@ Request Body:
 "checkInDate": "2024-09-15",<br/>
 "checkOutDate": "2024-09-22",<br/>
 "numGuests": 1,<br/>
-"roomType":<br/> {<br/>
-   "Enkelrum": 1<br/>
-  }
+"roomType":<br/> {
+   "Enkelrum": 1
+  }<br/>
 }
 
 
@@ -49,8 +49,8 @@ Description: Update an existing booking.
   "checkInDate": "2024-09-12",<br/>
   "checkOutDate": "2024-09-22",<br/>
   "numGuests": 1,<br/>
-  "roomType":<br/> {<br/>
-    "Svit": 1<br/>
+  "roomType":<br/> {
+    "Svit": 1
   }<br/>
 }
 
