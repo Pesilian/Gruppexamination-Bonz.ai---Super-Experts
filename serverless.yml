@@ -1,0 +1,76 @@
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: BONZAI
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "*"
+
+functions:
+  getAllBookings:
+    handler: functions/getAllBookings.handler
+    events:
+      - httpApi:
+          path: /booking
+          method: get
+  createBooking:
+    handler: functions/createBooking.handler
+    events:
+      - httpApi:
+          path: /booking
+          method: post
+  deleteBooking:
+    handler: functions/deleteBooking.handler
+    events:
+      - httpApi:
+          path: /booking/{id}
+          method: delete
+  changeBooking:
+    handler: functions/changeBooking.handler
+    events:
+      - httpApi:
+          path: /booking/{id}
+          method: put
+  getBooking:
+    handler: functions/getBooking.handler
+    events:
+      - httpApi:
+          path: /booking/{id}
+          method: get
+resources:
+  Resources:
+    Rooms:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: rooms
+        AttributeDefinitions:
+          - AttributeName: "roomName"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "roomName"
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    Bookings:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: bookings
+        AttributeDefinitions:
+          - AttributeName: "bookingNumber"
+            AttributeType: "S"
+        KeySchema:
+          - AttributeName: "bookingNumber"
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
