@@ -22,17 +22,17 @@ URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking
 
 Description: Create a new booking.
 
-Request Body:<br/>
-{
+Request Body:
+{<br/>
 "firstName": "John",<br/>
 "surname": "Doe",<br/>
 "email": "john.doe@example.com",<br/>
 "checkInDate": "2024-09-15",<br/>
 "checkOutDate": "2024-09-22",<br/>
 "numGuests": 1,<br/>
-"roomType":<br/> {
+"roomType":<br/> {<br/>
    "Enkelrum": 1
-  }
+  }<br/>
 }
 
 
@@ -42,16 +42,16 @@ URL: https://0o5li5kjt2.execute-api.eu-north-1.amazonaws.com/booking/{bookingNum
 Description: Update an existing booking.
 
 
-{
+{<br/>
   "firstName": "John",<br/>
   "surname": "Doe",<br/>
   "email": "john.doe@example.com",<br/>
   "checkInDate": "2024-09-12",<br/>
   "checkOutDate": "2024-09-22",<br/>
   "numGuests": 1,<br/>
-  "roomType":<br/> {
-    "Svit": 1
-  }
+  "roomType":<br/> {<br/>
+    "Svit": 1<br/>
+  }<br/>
 }
 
 
